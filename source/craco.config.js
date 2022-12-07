@@ -16,10 +16,33 @@ module.exports = ({ env }) => {
                 new FileManagerPlugin({
                     events: {
                         onEnd: {
+                            delete: [
+                                {
+                                    source: '../index.html',
+                                    options: {
+                                        force: true
+                                    }
+                                },
+                                {
+                                    source: '../static/',
+                                    options: {
+                                        force: true
+                                    }
+                                },
+                                {
+                                    source: '../asset-manifest.json',
+                                    options: {
+                                        force: true
+                                    }
+                                }
+                            ],
                             copy: [
                                 {
                                     source: './build/**',
-                                    destination: '../'
+                                    destination: '../',
+                                    options: {
+                                        overwrite: true
+                                    }
                                 }
                             ]
                         }

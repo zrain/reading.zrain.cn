@@ -33,8 +33,6 @@ module.exports = ({ env }) => {
             configure: (webpackConfig, { env, paths }) => {
                 // webpackConfig.devtool =
                 //     env !== 'production' ? 'eval-source-map' : '';
-
-                // console.log(`🚀 ~ webpackConfig`, webpackConfig);
                 return webpackConfig;
             }
         },

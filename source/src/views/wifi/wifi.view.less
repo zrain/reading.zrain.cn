@@ -36,7 +36,7 @@
         margin-bottom: 32px;
 
         input {
-            width: 48px;
+            width: 52px;
             height: 64px;
             margin: 0 12px;
 
@@ -54,5 +54,19 @@
 
         font-size: 16px;
         font-weight: 500;
+    }
+}
+
+.iframe-container {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    &.hide {
+        transform: translateY(-100%);
     }
 }

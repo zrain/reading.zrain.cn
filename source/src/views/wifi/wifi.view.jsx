@@ -1,10 +1,10 @@
-import { useEffect, useState, useMemo, useRef } from 'react';
-import axios from 'axios';
-import { InboxOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
-import LogoImage from '@/assets/img/little-bear-reading-logo.png';
-import './wifi.view.less';
+/* eslint-disable jsx-a11y/iframe-has-title */
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import LogoImage from '@/assets/img/little-bear-reading-logo.png';
+
+import './wifi.view.less';
 
 function isNumber(val) {
     var regPos = /^[0-9]+.?[0-9]*/; //判断是否是数字。
@@ -15,28 +15,6 @@ function isNumber(val) {
         return false;
     }
 }
-
-const { Dragger } = Upload;
-
-const props = {
-    name: 'file',
-    multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info) {
-        const { status } = info.file;
-        if (status !== 'uploading') {
-            console.log(info.file, info.fileList);
-        }
-        if (status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully.`);
-        } else if (status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-    onDrop(e) {
-        console.log('Dropped files', e.dataTransfer.files);
-    }
-};
 
 const getIpByCode = (str) => {
     if (!str) {
@@ -68,6 +46,10 @@ const getIpByCode = (str) => {
 export const WifiView = () => {
     const navigate = useNavigate();
 
+    const [connectIp, setConnectIp] = useState();
+
+    const [connectStatus, setConnectStatus] = useState();
+
     const input0 = useRef();
     const input1 = useRef();
     const input2 = useRef();
@@ -88,13 +70,8 @@ export const WifiView = () => {
         input7
     ];
 
-    const connect = async (ip) => {
-        const res = await axios.get(`http://${ip}:1127/connect`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    };
+    const iframeClassName =
+        connectStatus === true ? 'iframe-container' : 'iframe-container hide';
 
     const getPassword = () => {
         return inputs
@@ -107,10 +84,40 @@ export const WifiView = () => {
     const inputOk = async () => {
         const password = getPassword();
         const ip = getIpByCode(password);
-        const { code } = await connect(ip);
-        if (code === 200) {
-            navigate('/library');
-        }
+        setConnectIp(ip);
+
+        const frame = document.getElementById('frame');
+
+        // const fdoc = frame.contentDocument || frame.contentWindow.document;
+
+        window.addEventListener('message', (e) => {
+            console.log(`e.data:`, e.data);
+            if (e && e.data === 'connect-success') {
+                setConnectStatus(true);
+            }
+        });
+
+        frame.onload = () => {
+            console.log(`🚀 ~ inputOk ~ frame`, [frame]);
+            console.info('onload');
+
+            // setTimeout(() => {
+            frame?.contentWindow?.postMessage({ api: 'connect' }, '*');
+            // }, 300);
+
+            // console.log(`frame.contentWindow.test:`, frame.contentWindow.test);
+
+            // frame.contentWindow.test()
+        };
+
+        // const { code } = await HttpService.connect(ip);
+        // if (code === 200) {
+        //     navigate('/library', {
+        //         state: {
+        //             ip
+        //         }
+        //     });
+        // }
     };
 
     const findFocusInputIndex = () => {
@@ -210,27 +217,33 @@ export const WifiView = () => {
     }, []);
 
     return (
-        <div className="wifi-container">
-            <div className="title">
-                <div className="logo">
-                    <img className="logo-image" src={LogoImage} alt="" />
-                    <span>小熊阅读</span>
+        <>
+            <iframe
+                id="frame"
+                src={`http://${connectIp}`}
+                className={iframeClassName}
+            />
+            <div className="wifi-container">
+                <div className="title">
+                    <div className="logo">
+                        <img className="logo-image" src={LogoImage} alt="" />
+                        <span>小熊阅读</span>
+                    </div>
                 </div>
-            </div>
-            <div className="password-input">
-                <input ref={input0} maxLength={1} autoFocus />
-                <input ref={input1} maxLength={1} />
-                <input ref={input2} maxLength={1} />
-                <input ref={input3} maxLength={1} />
-                <input ref={input4} maxLength={1} />
-                <input ref={input5} maxLength={1} />
-                <input ref={input6} maxLength={1} />
-                <input ref={input7} maxLength={1} />
-            </div>
-            <div className="description">
-                <p>打开APP内的传书页面，输入密码即可开始传书～</p>
-            </div>
-            {/*<Dragger {...props} action={`http://${ip}:1127/upload`}>
+                <div className="password-input">
+                    <input ref={input0} maxLength={1} autoFocus />
+                    <input ref={input1} maxLength={1} />
+                    <input ref={input2} maxLength={1} />
+                    <input ref={input3} maxLength={1} />
+                    <input ref={input4} maxLength={1} />
+                    <input ref={input5} maxLength={1} />
+                    <input ref={input6} maxLength={1} />
+                    <input ref={input7} maxLength={1} />
+                </div>
+                <div className="description">
+                    <p>打开APP内的 "导入图书" 页面，输入密码即可开始传书。</p>
+                </div>
+                {/*<Dragger {...props} action={`http://${ip}:1127/upload`}>
                 <p className="ant-upload-drag-icon">
                     <InboxOutlined />
                 </p>
@@ -242,7 +255,8 @@ export const WifiView = () => {
                     uploading company data or other band files
                 </p>
             </Dragger> */}
-        </div>
+            </div>
+        </>
     );
 };
 

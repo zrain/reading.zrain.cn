@@ -1,4 +1,5 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
+
 import { HomeView, WifiView } from '@/views';
 
 const routes = createHashRouter([
@@ -8,10 +9,6 @@ const routes = createHashRouter([
     },
     {
         path: '/wifi',
-        element: <WifiView />
-    },
-    {
-        path: '/library',
         element: <WifiView />
     }
 ]);

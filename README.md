@@ -1,2 +1,1 @@
-# reading.zrain.cn
-little-bear-reading app
+# 小熊阅读 APP (LittleBearReadingApp)

@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.80543c39.css",
-    "main.js": "/static/js/main.673e92af.js",
+    "main.css": "/static/css/main.69ffc56b.css",
+    "main.js": "/static/js/main.7201ef2b.js",
     "static/js/787.7717ef8a.chunk.js": "/static/js/787.7717ef8a.chunk.js",
     "static/media/home-screen.png": "/static/media/home-screen.43056e8153629ff21237.png",
-    "static/media/little-bear-reading-logo.png": "/static/media/little-bear-reading-logo.522508de84d79cf6c0a3.png",
+    "static/media/little-bear-reading-logo.png": "/static/media/little-bear-reading-logo.d8d236f7acde2435521c.png",
     "static/media/app-store-download.svg": "/static/media/app-store-download.8c4986ee4828b47d16f5cd694ef065f2.svg",
     "index.html": "/index.html",
-    "main.80543c39.css.map": "/static/css/main.80543c39.css.map",
-    "main.673e92af.js.map": "/static/js/main.673e92af.js.map",
+    "main.69ffc56b.css.map": "/static/css/main.69ffc56b.css.map",
+    "main.7201ef2b.js.map": "/static/js/main.7201ef2b.js.map",
     "787.7717ef8a.chunk.js.map": "/static/js/787.7717ef8a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.80543c39.css",
-    "static/js/main.673e92af.js"
+    "static/css/main.69ffc56b.css",
+    "static/js/main.7201ef2b.js"
   ]
 }

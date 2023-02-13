@@ -1,2 +1,260 @@
 .library-container {
+    display: flex;
+    flex-direction: row;
+
+    height: 100vh;
+    padding: 12px;
+
+    background-color: #bfbfbf;
+
+    .left {
+        display: flex;
+        align-items: flex-start;
+        flex: 1;
+        flex-direction: column;
+
+        min-width: 200px;
+        padding-top: 40px;
+        padding-right: 32px;
+        padding-left: 32px;
+
+        border-top-left-radius: 32px;
+        border-bottom-left-radius: 32px;
+        background-color: #17181a;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+
+            margin-bottom: 56px;
+
+            img {
+                display: inline-block;
+
+                width: 40px;
+                margin-right: 8px;
+
+                border-radius: 12px;
+            }
+
+            span {
+                color: #fff;
+
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            margin: 0 auto;
+
+            .avatar {
+                overflow: hidden;
+
+                width: 88px;
+                margin-bottom: 8px;
+
+                border-radius: 100%;
+                background-color: #f8f8f8;
+
+                img {
+                    display: block;
+
+                    width: 100%;
+                }
+            }
+
+            .user-name {
+                text-align: center;
+
+                color: #ffffff;
+
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            .tips {
+                color: #adb8d4;
+            }
+        }
+    }
+    .middle {
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+
+        width: 68vw;
+        height: 100%;
+        padding: 32px 0 0 32px;
+
+        background-color: #1f2022;
+
+        .header {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+
+            margin-bottom: 40px;
+
+            .title {
+                margin-right: 16px;
+
+                color: #fff;
+
+                font-size: 32px;
+                font-weight: 600;
+            }
+
+            .tips {
+                margin-right: 32px;
+                padding: 8px 16px;
+
+                border: 1px dashed #fff;
+                border-radius: 8px;
+
+                div {
+                    color: #fff;
+
+                    font-size: 14px;
+                }
+
+                button {
+                    cursor: pointer;
+
+                    color: #4295f7;
+                    border: none;
+                    background-color: transparent;
+
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .scroll-view {
+            display: flex;
+            overflow-x: hidden;
+            overflow-y: auto;
+            flex: 1;
+
+            height: 100%;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .book-list {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+
+            width: 100%;
+            margin-left: -16px;
+
+            .empty-height {
+                width: 100%;
+                height: 80px;
+            }
+
+            .book-item {
+                position: relative;
+
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+
+                width: 360px;
+                margin-right: 10px;
+                padding: 16px 0 16px 16px;
+
+                &::after {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    width: 200%;
+                    height: 200%;
+
+                    content: '';
+                    transform: scale(0.5);
+                    transform-origin: 0 0;
+                    pointer-events: none;
+
+                    border: solid hsla(0, 0%, 100%, 0.05);
+                    border-width: 0 0 1px;
+                    border-radius: 0;
+                }
+
+                .book-cover {
+                    overflow: hidden;
+
+                    width: 64px;
+                    height: 92px;
+
+                    img {
+                        display: block;
+
+                        width: 100%;
+                    }
+                }
+
+                .book-info {
+                    display: flex;
+                    flex-direction: column;
+
+                    .title {
+                        display: inline-block;
+                        overflow: hidden;
+
+                        margin-left: 18px;
+
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        word-wrap: normal;
+                        word-break: break-all;
+
+                        color: #eef0f4;
+
+                        font-family: PingFang SC, -apple-system, SF UI Text,
+                            Lucida Grande, STheiti, Microsoft YaHei, sans-serif;
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+
+                    .author {
+                        position: relative;
+                        z-index: 2;
+
+                        display: inline-block;
+                        overflow: hidden;
+
+                        margin-top: 6px;
+                        margin-left: 18px;
+
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        word-wrap: normal;
+                        word-break: break-all;
+
+                        color: #8a8c90;
+
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+    .right {
+        display: flex;
+        flex: 1;
+
+        border-top-right-radius: 32px;
+        border-bottom-right-radius: 32px;
+        background-color: #17181a;
+    }
 }
